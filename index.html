@@ -17,6 +17,7 @@
       background:var(--gris-oxidiana);color:#333;
       min-height:100vh;display:flex;flex-direction:column
     }
+
     /* 🔺 NAVBAR */
     header{
       border-bottom:4px solid var(--rojo);
@@ -25,13 +26,22 @@
     header h1{color:var(--blanco);font-size:clamp(1.2rem,3vw,2rem)}
 
     /* 🔶 CONTENEDOR GENÉRICO */
-    main{flex:1;display:flex;align-items:center;justify-content:center;
-      padding:clamp(1rem,5vw,3rem) 1rem}
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column; /* ✅ Evita que se muestre en fila en móviles */
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 5vw, 3rem) 1rem;
+      gap: 1.5rem;
+    }
+
     .box{
       width:100%;max-width:700px;padding:clamp(1rem,5vw,2.5rem);
       background:var(--blanco);border:4px solid var(--rojo);border-radius:10px;
       box-shadow:0 8px 20px rgba(0,0,0,.15)
     }
+
     h2{text-align:center;color:#333;font-size:clamp(1.2rem,2.5vw,2rem);margin-bottom:1rem}
     p{font-size:clamp(.95rem,2vw,1.1rem);text-align:center;line-height:1.6;margin-bottom:2rem;color:#555}
 
@@ -73,6 +83,7 @@
 
   <!-- 🔶 CONTENIDO -->
   <main>
+
     <!-- Intro -->
     <section class="box" id="intro">
       <h2>¡Hola estimados clientes!</h2>
@@ -86,7 +97,7 @@
 
     <!-- Formulario -->
     <form class="box form-card" id="formulario"
-          action="https://formsubmit.co/ade8dfc35d765d77cdf1e6572a1441 58" method="POST">
+          action="https://formsubmit.co/ade8dfc35d765d77cdf1e6572a144158" method="POST">
       <h2>Reclamos &amp; Sugerencias</h2>
 
       <label for="nombre">Nombre (opcional)</label>
@@ -105,7 +116,6 @@
       <textarea id="mensaje" name="Mensaje" rows="6"
                 placeholder="Escribe aquí tu reclamo o sugerencia..." required></textarea>
 
-      <!-- Tras enviar, vuelve a la misma página con ?gracias=true -->
       <input type="hidden" name="_next" value="?gracias=true">
       <input type="hidden" name="_subject" value="Nuevo formulario Alma Pan">
 
@@ -130,24 +140,28 @@
       <a class="mapa-link" href="https://www.google.com/maps/place/PANADER%C3%8DA+MAGALLANES/@-41.4578848,-72.9494849,20z"
          target="_blank">Ver en Google Maps</a>
     </section>
+
   </main>
 
   <footer>&copy; 2025 Alma Pan Panadería</footer>
 
   <script>
-    // mostrar formulario desde intro
     function mostrarFormulario(){
       document.getElementById('intro').style.display='none';
       document.getElementById('formulario').style.display='block';
     }
 
-    // al cargar, si viene ?gracias=true mostrar la tarjeta de gracias
     document.addEventListener('DOMContentLoaded',()=>{
       const params=new URLSearchParams(window.location.search);
       if(params.has('gracias')){
         document.getElementById('intro').style.display='none';
         document.getElementById('formulario').style.display='none';
         document.getElementById('gracias').style.display='block';
+      } else {
+        // Solo mostrar intro al cargar (por seguridad)
+        document.getElementById('intro').style.display='block';
+        document.getElementById('formulario').style.display='none';
+        document.getElementById('gracias').style.display='none';
       }
     });
   </script>
