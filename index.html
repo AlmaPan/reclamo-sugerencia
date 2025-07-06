@@ -3,213 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Encuesta – Alma Pan Panadería</title>
+  <title>Alma Pan Panadería</title>
 
   <style>
-    :root {
-      --rojo: #c62828;
-      --gris-oxidiana: #2c2c2e;
-      --blanco: #ffffff;
+    :root{
+      --rojo:#c62828;
+      --gris-oxidiana:#2c2c2e;
+      --blanco:#ffffff;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+    html{font-size:16px}
+    body{
+      background:var(--gris-oxidiana);color:#333;
+      min-height:100vh;display:flex;flex-direction:column
     }
-
-    html {
-      font-size: 16px;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--gris-oxidiana);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
     /* 🔺 NAVBAR */
-    header {
-      background-color: transparent;
-      border-bottom: 4px solid var(--rojo);
-      padding: 1rem;
-      text-align: center;
+    header{
+      border-bottom:4px solid var(--rojo);
+      padding:1rem;text-align:center;background:transparent
     }
+    header h1{color:var(--blanco);font-size:clamp(1.2rem,3vw,2rem)}
 
-    header h1 {
-      color: var(--blanco);
-      font-size: clamp(1.2rem, 3vw, 2rem);
+    /* 🔶 CONTENEDOR GENÉRICO */
+    main{flex:1;display:flex;align-items:center;justify-content:center;
+      padding:clamp(1rem,5vw,3rem) 1rem}
+    .box{
+      width:100%;max-width:700px;padding:clamp(1rem,5vw,2.5rem);
+      background:var(--blanco);border:4px solid var(--rojo);border-radius:10px;
+      box-shadow:0 8px 20px rgba(0,0,0,.15)
     }
+    h2{text-align:center;color:#333;font-size:clamp(1.2rem,2.5vw,2rem);margin-bottom:1rem}
+    p{font-size:clamp(.95rem,2vw,1.1rem);text-align:center;line-height:1.6;margin-bottom:2rem;color:#555}
 
-    /* 🔶 SECCIONES PRINCIPALES */
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1rem, 5vw, 3rem) 1rem;
+    /* Botones */
+    .btn{
+      display:block;width:100%;padding:.75rem 1.5rem;margin-top:1.5rem;
+      background:var(--rojo);color:var(--blanco);border:none;border-radius:6px;
+      font-size:1rem;cursor:pointer;transition:background .3s
     }
+    .btn:hover{background:#a51f1f}
 
-    .container {
-      width: 100%;
-      max-width: 700px;
-      background-color: var(--blanco);
-      border: 4px solid var(--rojo);
-      border-radius: 10px;
-      padding: clamp(1rem, 5vw, 2.5rem);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    /* Formulario */
+    form label{display:block;margin-top:1.25rem;font-weight:bold;font-size:.95rem}
+    input[type=text],input[type=email],textarea{
+      width:100%;margin-top:.5rem;padding:.75rem;border:1px solid #ccc;border-radius:6px;font-size:1rem
     }
+    .radio-group{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:.5rem}
+    .radio-group label{font-weight:normal}
 
-    .container h2 {
-      font-size: clamp(1.2rem, 2.5vw, 2rem);
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #333;
-    }
+    /* Vista gracias */
+    .gracias img.logo{max-width:180px;margin-bottom:1.5rem}
+    .gracias h3{color:var(--rojo);font-size:1.2rem;margin:2rem 0 .5rem}
+    .gracias img.mapa{width:100%;border-radius:8px;margin:1rem 0}
+    .mapa-link{display:inline-block;background:var(--rojo);color:#fff;padding:.6rem 1rem;border-radius:5px;text-decoration:none}
+    .mapa-link:hover{background:#a51f1f}
 
-    .container p {
-      text-align: center;
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: #555;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
+    footer{text-align:center;color:var(--blanco);padding:.8rem;font-size:.85rem}
 
-    .container button,
-    .form-card button {
-      background-color: var(--rojo);
-      color: var(--blanco);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 1.5rem;
-      transition: background 0.3s ease;
-    }
-
-    .container button:hover,
-    .form-card button:hover {
-      background-color: #a51f1f;
-    }
-
-    /* FORMULARIO */
-    .form-card {
-      display: none;
-    }
-
-    form label {
-      display: block;
-      margin-top: 1.25rem;
-      font-weight: bold;
-      font-size: 0.95rem;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      margin-top: 0.5rem;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
-    .radio-group label {
-      font-weight: normal;
-    }
-
-    footer {
-      text-align: center;
-      color: var(--blanco);
-      padding: 0.8rem;
-      font-size: 0.85rem;
-    }
-
-    /* 📱 Adaptaciones adicionales */
-    @media (max-width: 480px) {
-      .container {
-        padding: 1.2rem;
-      }
-
-      .radio-group {
-        flex-direction: column;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      body {
-        font-size: 17px;
-      }
+    /* 📱 Ajustes móviles */
+    @media(max-width:480px){
+      .radio-group{flex-direction:column}
     }
   </style>
 </head>
 <body>
 
   <!-- 🔺 NAVBAR -->
-  <header>
-    <h1>Alma Pan Panadería</h1>
-  </header>
+  <header><h1>Alma Pan Panadería</h1></header>
 
-  <!-- 🟡 VISTA INTRODUCTORIA -->
+  <!-- 🔶 CONTENIDO -->
   <main>
-    <div class="container" id="intro">
+    <!-- Intro -->
+    <section class="box" id="intro">
       <h2>¡Hola estimados clientes!</h2>
       <p>
         En <strong>Alma Pan Panadería</strong> valoramos profundamente tu opinión.<br><br>
         Esta encuesta tiene como objetivo conocer tus ideas, inquietudes y sugerencias para que podamos seguir creciendo y mejorando juntos.<br><br>
         ¡Gracias por ayudarnos a hornear un mejor futuro!
       </p>
-      <button onclick="mostrarFormulario()">Comenzar Encuesta</button>
-    </div>
+      <button class="btn" onclick="mostrarFormulario()">Comenzar encuesta</button>
+    </section>
 
-    <!-- 📋 FORMULARIO -->
-    <form class="container form-card" id="formulario" action="https://formsubmit.co/almapan2.ahl@gmail.com" method="POST">
+    <!-- Formulario -->
+    <form class="box form-card" id="formulario"
+          action="https://formsubmit.co/almapan2.ahl@gmail.com" method="POST">
       <h2>Reclamos &amp; Sugerencias</h2>
 
       <label for="nombre">Nombre (opcional)</label>
-      <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre" />
+      <input id="nombre" name="Nombre" type="text" placeholder="Tu nombre">
 
       <label for="correo">Correo electrónico (opcional)</label>
-      <input type="email" id="correo" name="Correo" placeholder="tucorreo@example.com" />
+      <input id="correo" name="Correo" type="email" placeholder="tucorreo@example.com">
 
       <label>Tipo de mensaje</label>
       <div class="radio-group">
-        <label><input type="radio" name="Tipo" value="Reclamo" required /> Reclamo</label>
-        <label><input type="radio" name="Tipo" value="Sugerencia" required /> Sugerencia</label>
+        <label><input type="radio" name="Tipo" value="Reclamo" required> Reclamo</label>
+        <label><input type="radio" name="Tipo" value="Sugerencia" required> Sugerencia</label>
       </div>
 
       <label for="mensaje">Tu mensaje</label>
-      <textarea id="mensaje" name="Mensaje" rows="6" required placeholder="Escribe aquí tu reclamo o sugerencia..."></textarea>
+      <textarea id="mensaje" name="Mensaje" rows="6"
+                placeholder="Escribe aquí tu reclamo o sugerencia..." required></textarea>
 
-      <input type="hidden" name="_next" value="gracias.html" />
-      <input type="hidden" name="_subject" value="Nuevo formulario Alma Pan" />
+      <!-- Tras enviar, vuelve a la misma página con ?gracias=true -->
+      <input type="hidden" name="_next" value="?gracias=true">
+      <input type="hidden" name="_subject" value="Nuevo formulario Alma Pan">
 
-      <button type="submit">Enviar</button>
+      <button class="btn" type="submit">Enviar</button>
     </form>
+
+    <!-- Gracias -->
+    <section class="box gracias" id="gracias" style="display:none">
+      <img src="IMG/ALMA_PAN.png" alt="Logo Alma Pan" class="logo">
+      <h2>¡Gracias por tu aporte!</h2>
+      <p>
+        Tu opinión nos ayuda a mejorar cada día.<br>
+        Agradecemos sinceramente que te hayas tomado el tiempo para enviarnos tu reclamo o sugerencia.<br><br>
+        ¡Seguiremos horneando con amor y compromiso!
+      </p>
+
+      <h3>¿Te queda lejos nuestra sucursal?</h3>
+      <p>
+        ¡Tenemos otra ubicación más cerca de ti! Visítanos y sigue disfrutando de nuestros productos frescos.
+      </p>
+      <img src="IMG/UBICACION2.png" alt="Mapa segunda sucursal" class="mapa">
+      <a class="mapa-link" href="https://www.google.com/maps/place/PANADER%C3%8DA+MAGALLANES/@-41.4578848,-72.9494849,20z"
+         target="_blank">Ver en Google Maps</a>
+    </section>
   </main>
 
-  <footer>
-    &copy; 2025 Alma Pan Panadería
-  </footer>
+  <footer>&copy; 2025 Alma Pan Panadería</footer>
 
   <script>
-    function mostrarFormulario() {
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("formulario").style.display = "block";
+    // mostrar formulario desde intro
+    function mostrarFormulario(){
+      document.getElementById('intro').style.display='none';
+      document.getElementById('formulario').style.display='block';
     }
+
+    // al cargar, si viene ?gracias=true mostrar la tarjeta de gracias
+    document.addEventListener('DOMContentLoaded',()=>{
+      const params=new URLSearchParams(window.location.search);
+      if(params.has('gracias')){
+        document.getElementById('intro').style.display='none';
+        document.getElementById('formulario').style.display='none';
+        document.getElementById('gracias').style.display='block';
+      }
+    });
   </script>
 
 </body>
